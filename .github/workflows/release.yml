@@ -14,40 +14,50 @@ on:
         type: boolean
         default: false
       tag_name:
-        description: 'Release Tag (e.g. v1.0.0)'
+        description: 'Release Tag (e.g. v1.0.1)'
         required: false
         type: string
-        default: 'v1.0.0'
+        default: 'v1.0.1'
 
 permissions:
   contents: write
 
 jobs:
   build:
-    name: Build pak9_community.sin
+    name: Build SPAK Archives
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build SPAK Archive
+      - name: Build pak4.sin (SiN Reloaded)
         shell: pwsh
         run: |
-          ./tools/pack_spak.ps1 -InputDir . -OutputFile dist/pak9_community.sin
+          ./tools/pack_spak.ps1 -InputDir . -OutputFile dist/pak4.sin
 
-      - name: Compute SHA-256 Checksum
+      - name: Build pak9_community.sin (Classic SiN / Source Ports)
         shell: pwsh
         run: |
-          $hash = (Get-FileHash -Path dist/pak9_community.sin -Algorithm SHA256).Hash
-          Set-Content -Path dist/pak9_community.sin.sha256 -Value "$hash *pak9_community.sin"
-          Write-Host "SHA256: $hash"
+          Copy-Item dist/pak4.sin dist/pak9_community.sin
+
+      - name: Compute SHA-256 Checksums
+        shell: pwsh
+        run: |
+          $hash4 = (Get-FileHash -Path dist/pak4.sin -Algorithm SHA256).Hash
+          Set-Content -Path dist/pak4.sin.sha256 -Value "$hash4 *pak4.sin"
+          $hash9 = (Get-FileHash -Path dist/pak9_community.sin -Algorithm SHA256).Hash
+          Set-Content -Path dist/pak9_community.sin.sha256 -Value "$hash9 *pak9_community.sin"
+          Write-Host "pak4.sin SHA256:            $hash4"
+          Write-Host "pak9_community.sin SHA256:  $hash9"
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pak9_community
+          name: sin-community-pack
           path: |
+            dist/pak4.sin
+            dist/pak4.sin.sha256
             dist/pak9_community.sin
             dist/pak9_community.sin.sha256
           retention-days: 14
@@ -59,28 +69,46 @@ jobs:
           tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || inputs.tag_name }}
           name: SiN Community Pack ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || inputs.tag_name }}
           body: |
-            ### SiN Community Multiplayer Asset Pack (`pak9_community.sin`)
+            ### SiN Community Multiplayer Asset Pack
 
             Consolidated and sanitized community asset pack containing:
-            - **107 Community Multiplayer Maps** (DM, CTF, Rocket Arena, Wages of SiN)
+            - **36 Community Multiplayer Maps** (DM, CTF, Rocket Arena) with native in-game menu definitions
             - **Custom Textures, Models, and Skyboxes**
-            - **Announcer and In-game Audio Packs**
-            - **Zero UI / Menu Hijacks** (Pure clean assets)
+            - **Classic Announcer Audio Packs** (Blade, Elexis, JC, Custom)
+            - **Zero Proprietary Files / Zero Commercial Retail Bloat**
 
             #### Installation
-            1. Download `pak9_community.sin` below.
-            2. Place it in your `base/` directory alongside `pak0.sin`:
+
+            **For SiN Reloaded (Nightdive Remaster):**
+            1. Download **`pak4.sin`** below.
+            2. Place it in your `SiN Reloaded/base/` directory alongside `pak0.sin` .. `pak3.sin`:
+               ```
+               SiN Reloaded/
+               └── base/
+                   ├── pak0.sin
+                   ├── pak1.sin
+                   ├── pak2.sin
+                   ├── pak3.sin
+                   └── pak4.sin
+               ```
+            3. Launch SiN Reloaded directly from Steam! All community maps appear in the Multiplayer host menu.
+
+            **For Classic SiN / Wages of SiN / Source Ports:**
+            1. Download **`pak9_community.sin`** below.
+            2. Place it in your `SiN/base/` directory alongside `pak0.sin`:
                ```
                SiN/
                └── base/
                    ├── pak0.sin
                    └── pak9_community.sin
                ```
-            3. Launch `sin_client.exe` or `sin_ded.exe`.
+            3. Launch `sin.exe` or your dedicated server.
 
-            **SHA-256 Checksum:**
-            See attached `pak9_community.sin.sha256`.
+            **SHA-256 Checksums:**
+            See attached `.sha256` files.
           files: |
+            dist/pak4.sin
+            dist/pak4.sin.sha256
             dist/pak9_community.sin
             dist/pak9_community.sin.sha256
             maplist.txt

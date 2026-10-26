@@ -1,0 +1,9 @@
+{
+  "title": "Millenium CTF",
+  "bsp": "millenium",
+  "author": "Community",
+  "modes": [
+    "ctf",
+    "dm"
+  ]
+}

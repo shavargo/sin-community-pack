@@ -1,0 +1,9 @@
+{
+  "title": "Unfortunate Proximity",
+  "bsp": "ctf_prox",
+  "author": "Community",
+  "modes": [
+    "ctf",
+    "dm"
+  ]
+}

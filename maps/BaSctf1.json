@@ -1,0 +1,9 @@
+{
+  "title": "BaS CTF 1",
+  "bsp": "BaSctf1",
+  "author": "Community",
+  "modes": [
+    "ctf",
+    "dm"
+  ]
+}

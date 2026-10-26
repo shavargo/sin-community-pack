@@ -1,0 +1,9 @@
+{
+  "title": "Capture Zee Bookcase",
+  "bsp": "spryctf",
+  "author": "Community",
+  "modes": [
+    "ctf",
+    "dm"
+  ]
+}
