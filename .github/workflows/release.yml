@@ -14,52 +14,65 @@ on:
         type: boolean
         default: false
       tag_name:
-        description: 'Release Tag (e.g. v1.0.1)'
+        description: 'Release Tag (e.g. v1.0.2)'
         required: false
         type: string
-        default: 'v1.0.1'
+        default: 'v1.0.2'
 
 permissions:
   contents: write
 
 jobs:
   build:
-    name: Build SPAK Archives
+    name: Build Release Packages
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build pak4.sin (SiN Reloaded)
+      - name: Build Classic SPAK Archive (pak9_community.sin)
         shell: pwsh
         run: |
-          ./tools/pack_spak.ps1 -InputDir . -OutputFile dist/pak4.sin
+          ./tools/pack_spak.ps1 -InputDir . -OutputFile dist/pak9_community.sin
 
-      - name: Build pak9_community.sin (Classic SiN / Source Ports)
+      - name: Build SiN Reloaded Zip Package (sin-reloaded-community.zip)
         shell: pwsh
         run: |
-          Copy-Item dist/pak4.sin dist/pak9_community.sin
+          $tempDir = Join-Path $env:RUNNER_TEMP "sin_reloaded_pack"
+          if (Test-Path $tempDir) { Remove-Item $tempDir -Recurse -Force }
+          $baseDir = Join-Path $tempDir "base"
+          New-Item -ItemType Directory -Path $baseDir -Force | Out-Null
+          
+          $folders = @("demos", "maps", "models", "pics", "sound", "textures")
+          foreach ($f in $folders) {
+              if (Test-Path $f) {
+                  Copy-Item -Path $f -Destination (Join-Path $baseDir $f) -Recurse -Force
+              }
+          }
+          
+          Compress-Archive -Path "$tempDir/base" -DestinationPath dist/sin-reloaded-community.zip -CompressionLevel Optimal
+          Remove-Item $tempDir -Recurse -Force
 
       - name: Compute SHA-256 Checksums
         shell: pwsh
         run: |
-          $hash4 = (Get-FileHash -Path dist/pak4.sin -Algorithm SHA256).Hash
-          Set-Content -Path dist/pak4.sin.sha256 -Value "$hash4 *pak4.sin"
           $hash9 = (Get-FileHash -Path dist/pak9_community.sin -Algorithm SHA256).Hash
           Set-Content -Path dist/pak9_community.sin.sha256 -Value "$hash9 *pak9_community.sin"
-          Write-Host "pak4.sin SHA256:            $hash4"
-          Write-Host "pak9_community.sin SHA256:  $hash9"
+          $hashZip = (Get-FileHash -Path dist/sin-reloaded-community.zip -Algorithm SHA256).Hash
+          Set-Content -Path dist/sin-reloaded-community.zip.sha256 -Value "$hashZip *sin-reloaded-community.zip"
+          Write-Host "pak9_community.sin SHA256:         $hash9"
+          Write-Host "sin-reloaded-community.zip SHA256: $hashZip"
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: sin-community-pack
           path: |
-            dist/pak4.sin
-            dist/pak4.sin.sha256
             dist/pak9_community.sin
             dist/pak9_community.sin.sha256
+            dist/sin-reloaded-community.zip
+            dist/sin-reloaded-community.zip.sha256
           retention-days: 14
 
       - name: Publish GitHub Release
@@ -80,18 +93,17 @@ jobs:
             #### Installation
 
             **For SiN Reloaded (Nightdive Remaster):**
-            1. Download **`pak4.sin`** below.
-            2. Place it in your `SiN Reloaded/base/` directory alongside `pak0.sin` .. `pak3.sin`:
+            1. Download **`sin-reloaded-community.zip`** below.
+            2. Extract it directly into your `SiN Reloaded` installation directory (merges into `base/`):
                ```
                SiN Reloaded/
                └── base/
-                   ├── pak0.sin
-                   ├── pak1.sin
-                   ├── pak2.sin
-                   ├── pak3.sin
-                   └── pak4.sin
+                   ├── maps/
+                   ├── textures/
+                   ├── sound/
+                   └── models/
                ```
-            3. Launch SiN Reloaded directly from Steam! All community maps appear in the Multiplayer host menu.
+            3. Launch SiN Reloaded directly through Steam. All community maps appear in the Multiplayer host menu.
 
             **For Classic SiN / Wages of SiN / Source Ports:**
             1. Download **`pak9_community.sin`** below.
@@ -107,8 +119,8 @@ jobs:
             **SHA-256 Checksums:**
             See attached `.sha256` files.
           files: |
-            dist/pak4.sin
-            dist/pak4.sin.sha256
             dist/pak9_community.sin
             dist/pak9_community.sin.sha256
+            dist/sin-reloaded-community.zip
+            dist/sin-reloaded-community.zip.sha256
             maplist.txt

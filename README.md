@@ -2,9 +2,9 @@
 
 Clean, sanitized community multiplayer asset package for **SiN Reloaded** and **Classic SiN / Wages of SiN**.
 
-Automated GitHub Actions builds assemble this pure community asset tree into drop-in SPAK archives:
-- **`pak4.sin`**: Drop-in archive for **SiN Reloaded** (Nightdive remaster).
-- **`pak9_community.sin`**: Drop-in archive for **Classic SiN 1998 / Wages of SiN / Source Ports**.
+Automated GitHub Actions builds assemble this pure community asset tree into ready-to-use packages:
+- **`sin-reloaded-community.zip`**: Ready-to-extract package for **SiN Reloaded** (Nightdive remaster).
+- **`pak9_community.sin`**: Single drop-in SPAK archive for **Classic SiN 1998 / Wages of SiN / Source Ports**.
 
 ---
 
@@ -20,25 +20,25 @@ This repository collects and preserves **strictly pure community-created assets*
 | **Audio (`sound/`, `music/`)** | **120+** | Custom map audio plus classic multi-kill announcer packs (Blade, Elexis, JC, Custom) |
 | **Models (`models/`)** | **60+** | Community weapons, player models, and custom props (`.sam`, `.sbm`, `.def`) |
 | **Textures & Art (`textures/`, `pics/`)** | **85+** | Custom level textures and map preview shots (`.swl`, `.tga`, `.pal`) |
-| **Total Archive Size** | **~60 MB** | Zero proprietary base game or expansion assets |
+| **Total Archive Size** | **~34 MB zip / ~60 MB uncompressed** | Zero proprietary base game or expansion assets |
 
 ---
 
 ## Installation
 
 ### For SiN Reloaded (Nightdive Remaster)
-1. Download **`pak4.sin`** from the [Latest Release](../../releases/latest).
-2. Place `pak4.sin` directly into your `SiN Reloaded/base/` directory alongside `pak0.sin` through `pak3.sin`:
+1. Download **`sin-reloaded-community.zip`** from the [Latest Release](../../releases/latest).
+2. Extract the zip file directly into your `SiN Reloaded` installation directory so the folders merge into `base/`:
    ```text
    SiN Reloaded/
    └── base/
-       ├── pak0.sin
-       ├── pak1.sin
-       ├── pak2.sin
-       ├── pak3.sin
-       └── pak4.sin
+       ├── maps/
+       ├── models/
+       ├── pics/
+       ├── sound/
+       └── textures/
    ```
-3. Launch SiN Reloaded directly through Steam. The engine mounts `pak4.sin` automatically, and all community maps appear in the in-game Multiplayer menu with proper titles and authors.
+3. Launch SiN Reloaded normally through Steam. The engine indexes the folders automatically, and all community maps appear in the in-game Multiplayer host menu with proper titles and authors.
 
 ### For Classic SiN / Wages of SiN / Source Ports
 1. Download **`pak9_community.sin`** from the [Latest Release](../../releases/latest).
@@ -49,7 +49,7 @@ This repository collects and preserves **strictly pure community-created assets*
        ├── pak0.sin
        └── pak9_community.sin
    ```
-3. Launch the game or dedicated server. The engine automatically mounts `pak9_community.sin` and makes the community maps and announcer sounds available.
+3. Launch `sin.exe` or your dedicated server. The engine mounts `pak9_community.sin` automatically.
 
 ---
 
@@ -64,10 +64,11 @@ See [`maplist.txt`](maplist.txt) for the complete list:
 
 ## Building Locally
 
-You can build the archives locally using PowerShell (`pwsh`) on Windows, Linux, or macOS:
+You can build the packages locally using PowerShell (`pwsh`) on Windows, Linux, or macOS:
 
 ```powershell
-pwsh ./tools/pack_spak.ps1 -InputDir . -OutputFile dist/pak4.sin
+# Build Classic SPAK archive
+pwsh ./tools/pack_spak.ps1 -InputDir . -OutputFile dist/pak9_community.sin
 ```
 
 ---
