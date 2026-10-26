@@ -1,6 +1,6 @@
 # SiN Multiplayer Pure Community Map Index
-# Total Community Maps: 20
-# Cleaned of all retail/expansion commercial content.
+# Total Community Maps: 36
+# Verified pure community content (Zero commercial / retail assets).
 
 [Rocket Arena & Tournament]
 hex_ra2
@@ -24,4 +24,22 @@ wickra
 wickra2
 
 [Deathmatch]
+Arena
+city
+darkdm1
+dm_vertical
+flameorama
+highiron
 MortaL
+Posey9
+Sin1kcd
+Sin1q3a
+Sin1rock
+trap
+
+[Capture The Flag]
+BaSctf1
+ctf_prox
+kungfuctf
+millenium
+spryctf
