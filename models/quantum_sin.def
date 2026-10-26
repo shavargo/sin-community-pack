@@ -1,0 +1,40 @@
+SDEF
+//
+// The file declaration section
+//
+path models/quantum_w
+scale .5
+quantum_w_base.sbm
+quant_w_skin.tga
+
+//
+// Declare the animation types and files
+//
+idle1    quantum_p.sam
+switchto	switchto.sam
+idle2		quantum_d.sam
+firemode2	quant_d_fire.sam
+switchback	switchback.sam	
+
+//id 200 group innercore fullbright translucent33
+id 800 group weapon bone barrel 0 0 0
+
+//
+// The initialization section
+//
+!init:
+server classname QuantumDestabilizer
+server iconname "w_quantum"
+server aliascache snd_pickup "weapons/pkup/pkup5.wav"
+
+//
+// The main section
+//
+!main:
+
+/*SINED weapon_quantumd (.3 .3 1) (0 0 0) (0 0 0)
+Quantum Destabilizer - World Model
+*/
+
+
+

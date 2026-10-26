@@ -1,0 +1,44 @@
+SDEF
+path models/quantum_fx
+origin 0 0 0
+scale 1.0
+comet_base.sbm
+comet_skin.tga
+
+idle     comet.sam
+flyburst comet.sam
+explode  comet.sam
+
+id 10 group particlestream1 bone alpha 0 0 0 nodraw
+id 15 group particlestream2 bone beta 0 0 0 nodraw
+id 200 group burstfront bone front 0 0 0 nodraw
+id 300 group burstback bone back 0 0 0 nodraw
+
+!init:
+
+//client aliascache snd_burst1 "weapons/quantum/burst.wav" .6 3
+
+server ambientsound "weapons/quantum/burst.wav"
+
+!main:
+server idle last nextanim idle
+
+client idle 0 bonespawn front sprites/qp_sphere.spr time 10 scale 2 animate animateonce 
+client idle 0 bonespawn back sprites/qp_exhaust.spr time 10 scale 3 animate animateonce
+client idle 0 bonespawnparticle alpha count 5 lightstyle 126 velocity 2 randoffset 1 gravity 1
+client idle 0 bonespawnparticle beta count 5 lightstyle 126 velocity 2 randoffset 2 gravity 1
+client idle 0 bonespawnparticle back count 5 lightstyle 126 velocity 10 randoffset 5 gravity -2
+client idle 1 bonespawn front sprites/qp_sphere.spr time 10 scale 1 animate animateonce
+client idle 1 bonespawn back sprites/qp_exhaust.spr time 10 scale 3 animate animateonce
+client idle 1 bonespawnparticle alpha count 5 lightstyle 126 velocity 3 randoffset 1 gravity -1
+client idle 1 bonespawnparticle beta count 5 lightstyle 126 velocity 3 randoffset 2 gravity -1
+client idle 1 bonespawnparticle back count 5 lightstyle 126 velocity 10 randoffset 5 gravity -2
+
+//client flyburst 0 bonespawn front sprites/qp_sphere.spr time 10 scale .5 animate animateonce 
+client flyburst 0 bonespawn alpha sprites/qp_exhaust.spr time 10 scale 2 animate animateonce
+//client flyburst 1 bonespawn front sprites/qp_sphere.spr time 10 scale .5 animate animateonce
+client flyburst 1 bonespawn beta sprites/qp_exhaust.spr time 10 scale 2 animate animateonce
+
+client explode first spawn sprites/shockwave2.spr scale 80 scaleanim alphafade time 1
+client explode first spawnparticle count 200 lightstyle 126 velocity 100 gravity -50 
+client explode first spawn models/sphere3.def scale 50 scaleanim time 1 alphafade time 5

@@ -1,0 +1,35 @@
+//===============================================================
+// Korrept CTF INFORMATION MENU (Low Res)
+//===============================================================
+menulevel dm_mapinfo1
+
+headeritem "fade 0.66 oxl 40 oyt -198 picn ctf_defense3"
+enditem
+headeritem "fc 1 1 1 1 jcx oyt -76 boxtext \"CTF_Defense\""
+enditem
+
+headeritem "fc 1 1 1 1 oxl 87 oyt -100 string \"Map Title: \""
+enditem
+headeritem "fc 0.53 0.53 1 0.8 oxl 167 oyt -100 string \"CTF_Defense\""
+enditem
+
+headeritem "fc 1 1 1 1 oxl 87 oyt -110 string \"Map Name: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 1 oxl 167 oyt -110 string \"ctf_defense.bsp\""
+enditem
+
+headeritem "fc 1 1 1 1 oxl 87 oyt -120 string \"Map Type: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 1 oxl 167 oyt -120 string \"CTF\""
+enditem
+
+headeritem "fc 1 1 1 1 oxl 87 oyt -140 string \"Created by: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 1 oxl 230 oyt -140 string \"Korrupt\""
+enditem
+
+menuitem "fc 0.7 0.7 0.7 0.7 oxl 57 oyt -186 string \"Return to previous menu...\""
+selitem  "fc 1 1 1 1 oxl 57 oyt -186 cursor string \"Return to previous menu...\""
+helpdata "fc 1 1 1 1 jcx yv -160 boxtext \"This option takes you back to\nthe start server selection menu.\""
+actionitem "popmenu"
+enditem

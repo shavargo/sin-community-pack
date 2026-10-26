@@ -1,0 +1,9 @@
+path music/thrall
+normal thrllmst.wav
+action thrllmst2.wav
+
+!normal loop
+!action interrupt
+!action loop
+
+

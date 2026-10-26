@@ -1,0 +1,21 @@
+//===========================================================================
+// Sin Org Images - Ninken
+//===========================================================================
+
+fullfill 0 0 0 1
+
+oxl 0 oyb 256 picn im_frames/sin/dm0_1
+oxl 256 oyb 256 picn im_frames/sin/dm0_2
+oxl 512 oyb 256 picn im_frames/sin/dm0_3
+oxl 0 oyb 0 picn im_frames/sin/dm0_4
+oxl 256 oyb 0 picn im_frames/sin/dm0_5
+oxl 512 oyb 0 picn im_frames/sin/dm0_6
+
+
+// ------------------------------------------------
+// Loading The Level Display
+// ------------------------------------------------
+
+oxl 0 oyb 0 loadbar 640 8
+
+fc 0 0.29 0.8 1 jcx oyb 0 string "Envy - Sin Offical Deathmatch"

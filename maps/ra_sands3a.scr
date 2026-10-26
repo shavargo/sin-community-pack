@@ -1,0 +1,78 @@
+waitForplayer
+
+thread init_levcon
+level.bar_swing_time = 3.5
+level.bar_damage = 1000
+
+
+$bar1 bind $bar1_orig
+
+thread rotate_bar1_thread
+thread start_toggle1_button_thread
+end
+// MAIN PROCEDURE
+
+rotate_bar1_thread:
+
+$bar1_orig time level.bar_swing_time
+$bar_axle setdamage level.bar_damage
+
+$bar1_orig rotateYup 360
+waitFor $bar1_orig
+
+goto rotate_bar1_thread
+end
+//end rotate_bar1_thread
+
+
+start_toggle1_button_thread:
+$up1_button onuse execute_toggle1_button_press_thread
+pause
+end
+
+execute_toggle1_button_press_thread:
+$up1_button playsound environment/switch/sw2.wav
+thread toggle_bar_speed_thread
+thread start_toggle1_button_thread
+end
+
+
+
+thread toggle_bar_speed_thread:
+print " --> Entering  " 
+print level.bar_swing_time
+ 
+level.bar_swing_time ifequal 2 goto toggle_down
+level.bar_swing_time = 2
+environment/fridge/frgloop2.wav
+goto endola
+
+print "  I SHOULD NEVER PRINT   "
+
+toggle_down:
+print "  toggle down  "
+print level.bar_swing_time
+level.bar_swing_time = 3.5
+ambientsound environment/fridge/frgloop1.wav
+endola: 
+print "  endola  " 
+print level.bar_swing_time
+print " "
+    
+end
+
+// ** CONSOLE ROUTINES **
+// *INITIALIZE LEVEL CONSOLE
+init_levcon:
+local.con_levcon string "%con_levcon"
+local.con_levcon conlayout "jcx yt -10 fc 0 0 1 1 string \"Sands Of RA III\""
+local.con_levcon conapplayout "jcx yt -20  fc 0 0 1 1 string \"Quakers Bunny Hopping Hell\""
+local.con_levcon conapplayout "jcx yt -30  fc 0 0 1 1 string \"by\""
+local.con_levcon conapplayout "jcx yt -40  fc 0 0 1 1 string \"claudec\""
+local.con_levcon conapplayout "jcx yt -50  fc 0 0 1 1 string \"claudec@claudec.com\""
+local.con_levcon conapplayout "jcx yt -60  fc 0 0 1 1 string \"www.claudec.com\""
+end
+
+precache:
+cachesound environment/switch/sw2.wav
+end

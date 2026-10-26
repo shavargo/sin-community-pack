@@ -1,0 +1,21 @@
+//===========================================================================
+// Sin Org Images - Ninken
+//===========================================================================
+
+fullfill 0 0 0 1
+
+oxl 0 oyb 256 picn im_frames/hb/hb01
+oxl 256 oyb 256 picn im_frames/hb/hb02
+oxl 512 oyb 256 picn im_frames/hb/hb03
+oxl 0 oyb 0 picn im_frames/hb/hb04
+oxl 256 oyb 0 picn im_frames/hb/hb05
+oxl 512 oyb 0 picn im_frames/hb/hb06
+
+
+// ------------------------------------------------
+// Loading The Level Display
+// ------------------------------------------------
+
+oxl 0 oyb 0 loadbar 640 8
+
+fc 0 0.29 0.8 1 jcx oyb 0 string "hbdm2 - Hoverbike Deathmatch 2"

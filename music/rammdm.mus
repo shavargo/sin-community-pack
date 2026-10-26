@@ -1,0 +1,5 @@
+path music/dm/ramm
+normal rammdm.wav
+
+!normal loop .7
+

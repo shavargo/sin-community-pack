@@ -1,0 +1,4 @@
+airclamp 0
+start:
+waitforplayer
+end

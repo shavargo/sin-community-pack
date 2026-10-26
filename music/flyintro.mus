@@ -1,0 +1,10 @@
+path music/flyintro
+action intract.wav
+normal intrnorm.wav
+
+!action loop
+!action interrupt
+!action restart
+!normal loop
+!normal volume .8
+

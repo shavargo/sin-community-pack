@@ -1,0 +1,27 @@
+# SiN Multiplayer Pure Community Map Index
+# Total Community Maps: 20
+# Cleaned of all retail/expansion commercial content.
+
+[Rocket Arena & Tournament]
+hex_ra2
+hex_ra4
+hex_ra5
+jungle_ra
+RA101
+ra3map2
+ra3map3
+ra3map7
+RAbeam
+ra_cliff
+ra_icetech1
+ra_palm_beach
+ra_river
+ra_sands1a
+ra_sands2a
+ra_sands3a
+ra_stone
+wickra
+wickra2
+
+[Deathmatch]
+MortaL

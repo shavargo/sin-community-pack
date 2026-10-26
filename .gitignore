@@ -1,0 +1,17 @@
+# Output directory for compiled pack files
+dist/
+*.sin
+*.zip
+
+# Editor & OS artifacts
+.vs/
+.vscode/
+.idea/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary & Log files
+*.log
+*.tmp

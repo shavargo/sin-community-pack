@@ -1,0 +1,15 @@
+waiForplayer
+thread init_levcon
+
+end
+
+
+// ** CONSOLE ROUTINES **
+// *INITIALIZE LEVEL CONSOLE
+init_levcon:
+%con_testcon1 conlayout "jcx 4  yt -10 fc 0 0 1 1 string \"Sands Of RA II\""
+%con_testcon1 conapplayout "jcx 4  yt -15  fc 0 0 1 1 string \"by\""
+%con_testcon1 conapplayout "jcx 4  yt -20  fc 0 0 1 1 string \"claudec\""
+%con_testcon1 conapplayout "jcx 4  yt -30  fc 0 0 1 1 string \"claudec@claudec.com\""
+%con_testcon1 conapplayout "jcx 4  yt -35  fc 0 0 1 1 string \"www.claudec.com\""
+end

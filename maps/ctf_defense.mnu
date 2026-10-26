@@ -1,0 +1,67 @@
+//===============================================================
+// CTF INFORMATION MENU
+//===============================================================
+menulevel dm_mapinfo1
+
+headeritem "fade 0.5 jcx oyt -128 box 24 1"
+enditem
+headeritem "fc 1 1 1 1 jcx oyt -120 string \"Defense CTF\""
+enditem
+
+headeritem "fade 0.5 oxl 80 oyt -390 box 58 29"
+enditem
+
+headeritem "fade 0.8 oxl 100 oyt -300 picn ctf_defense3"
+enditem
+
+headeritem "fc 1 1 1 1 oxl 250 oyt -160 string \"MAP INFORMATION\""
+enditem
+
+headeritem "fc 1 1 1 0.5 oxl 250 oyt -180 string \"Map Title: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 0.8 oxl 340 oyt -180 string \"Defense CTF\""
+enditem
+
+headeritem "fc 1 1 1 0.5 oxl 250 oyt -190 string \"Map Name: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 0.8 oxl 340 oyt -190 string \"ctf_defense.bsp\""
+enditem
+
+headeritem "fc 1 1 1 0.5 oxl 250 oyt -200 string \"Map Type: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 0.8 oxl 340 oyt -200 string \"CTF\""
+enditem
+
+headeritem "fc 1 1 1 0.5 oxl 250 oyt -230 string \"Created by: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 0.8 oxl 350 oyt -230 string \"Korrupt\""
+enditem
+
+menuitem "fc 0.7 0.7 0.7 0.7 oxl 130 oyt -380 string \"Return to the previous menu...\""
+selitem  "fc 1 1 1 1 oxl 130 oyt -380 cursor string \"Return to the previous menu...\""
+actionitem "popmenu"
+enditem
+
+//===============================================================
+menulevel dm_mapinfo2
+
+headeritem "fade 0.5 jcx oyt -128 box 24 1"
+enditem
+headeritem "fc 1 1 1 1 jcx oyt -121 string \"Defense CTF\""
+enditem
+
+headeritem "fade 0.8 oxl 100 oyt -300 picn ctf_defense3"
+enditem
+
+headeritem "fc 1 1 1 1 oxl 250 oyt -160 string \"MAP INFORMATION\""
+enditem
+
+headeritem "fc 1 1 1 1 oxl 250 oyt -180 string \"Map Settings: \""
+enditem
+headeritem "fc 0.53 0.53 0.83 0.8 oxl 384 oyt -180 string \"Choose whatever you want\""
+enditem
+
+menuitem "fc 0.7 0.7 0.7 0.7 oxl 130 oyt -380 string \"Return to the previous menu...\""
+selitem  "fc 1 1 1 1 oxl 130 oyt -380 cursor string \"Return to the previous menu...\""
+actionitem "popmenu"
+enditem

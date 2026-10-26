@@ -1,0 +1,9 @@
+path music/dm/jtk
+action action.wav
+normal normal.WAV 
+
+!action loop
+!action interrupt
+!action restart
+!normal loop
+!normal volume .8

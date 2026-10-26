@@ -1,0 +1,166 @@
+SDEF
+// -----------------------------------------------------------------------------
+//  $Logfile:: /Quake 2 Engine/Sin/Base Sin Data/Models/Weapon/view_quantum.d $
+// $Revision:: 31                                                             $
+//   $Author:: Joeske                                                         $
+//     $Date:: 10/23/98 2:54a                                                 $
+//
+// Copyright (C) 1998 by Ritual Entertainment, Inc.
+// All rights reserved.
+//
+// This source may not be distributed and/or modified without
+// expressly written permission by Ritual Entertainment, Inc.
+//
+// This is a model definition file.  It is to be used in conjunction with Sin.
+// -----------------------------------------------------------------------------
+// MODEL DESCRIPTION:
+// View Weapon Model: Quantum Destabilzer/Particlizer.
+//
+// MODEL AUTHOR:
+// Michael
+
+// -----------------------------------------------------------------------------
+// FILE DECLARATIONS
+//
+// Model Commands
+path models/quantum
+origin 70 -3 -30
+scale 1.5
+
+// Base Model
+quant_base2.sbm
+
+// Skins
+normal	    		quant_grid.tga
+
+// Normal Animations
+ready      	        ready.sam
+putaway  		particle_putaway.sam
+idle 			particle_idle.sam
+fire                    particle_fire.sam
+releasefire             particle_release.sam
+
+//secondaryready        destab_ready.sam
+//primaryidle  		particle_idle.sam
+//primaryfire   	particle_fire.sam
+//releasefire  		particle_release.sam
+//primaryputaway	particle_putaway.sam
+//secondaryidle		destab_idle.sam
+//secondaryfire		fire2.sam
+//secondaryputaway	destab_putaway.sam
+//primary2secondary	switchto.sam
+//secondary2primary 	switchback.sam
+
+// Define group areas
+id 200 group weapon bone barrel 0 0 0
+//id 800 group core fullbright translucent66
+
+// -----------------------------------------------------------------------------
+// INITIALIZATION SECTION
+//
+!init:
+
+// Class Setup
+server actionincrement 80
+server setaimanim primaryidle 0
+
+// Client Sound Aliases
+client aliascache snd_fire1     "weapons/quantum/fire.wav"
+//client aliascache snd_altfire1  "weapons/quantum/altfire.wav"
+client aliascache snd_powerup1  "weapons/quantum/powerup.wav"
+client aliascache snd_loop1     "weapons/quantum/loop.wav"
+client aliascache snd_open1     "weapons/quantum/open.wav"
+client aliascache snd_close1    "weapons/quantum/close.wav"
+client aliascache snd_flame1    "weapons/quantum/flame3.wav"
+client aliascache snd_upsec1    "weapons/quantum/loop2up.wav"
+client aliascache snd_downsec1  "weapons/quantum/loop2down.wav"
+client aliascache snd_altloop1  "weapons/quantum/loop2.wav"
+client aliascache snd_null1     "misc/null.wav"
+
+// -----------------------------------------------------------------------------
+// MAIN SECTION
+//
+!main:
+
+server fire first destruct_time 5 // 5 seconds till this thing self destructs
+server fire first eatammo
+client fire first randomsound snd_powerup 1 7
+
+client ready first randomsound snd_open .3 7
+client ready last randomsound snd_loop .3 7
+
+client putaway first randomsound snd_close .7 7
+
+server releasefire first shoot
+client releasefire first randomsound snd_fire 1 7
+server releasefire first weaponsound
+
+//server primaryfire first destruct_time 5 // 5 seconds till this thing self destructs
+//server primaryfire first eatammo
+//client primaryfire first randomsound snd_powerup 1 7
+
+//client primaryidle first randomsound snd_loop .3 7
+
+//client secondaryidle first randomsound snd_loop .3 7
+
+//client primaryputaway first randomsound snd_close .7 7
+//client secondaryputaway first randomsound snd_close .7 7
+
+//server primary2secondary first setaimanim secondaryidle 0
+//client primary2secondary first randomsound snd_upsec .7 7
+//client primary2secondary last randomsound snd_altloop .7 7
+
+//server secondary2primary first setaimanim primaryidle 0
+//client secondary2primary first randomsound snd_downsec .7 7
+ 
+//server secondaryfire first effects +everyframe
+//server secondaryfire 0 shoot 512
+//client secondaryfire first randomsound snd_flame 1 1
+//client secondaryfire 0 bonespawn barrel sprites/qp_sphere.spr touchdie_nofade forwardvel 600 physics lerp minscale 1 scale 2 time 0.5 randorigin 2 randframe scaleanim randframe randroll
+//server secondaryfire 1 shoot 512
+//client secondaryfire 1 bonespawn barrel sprites/qp_sphere.spr touchdie_nofade forwardvel 600 physics lerp minscale 1 scale 2 time 0.5 randorigin 2 randframe scaleanim randframe randroll
+//server secondaryfire 2 shoot 512
+//client secondaryfire 2 bonespawn barrel sprites/qp_sphere.spr touchdie_nofade forwardvel 600 physics lerp minscale 1 scale 2 time 0.5 randorigin 2 randframe scaleanim randframe randroll
+//server secondaryfire 3 shoot 512
+//client secondaryfire 3 bonespawn barrel sprites/qp_sphere.spr touchdie_nofade forwardvel 600 physics lerp minscale 1 scale 2 time 0.5 randorigin 2 randframe scaleanim randframe randroll
+//server secondaryfire last effects -everyframe
+
+// -----------------------------------------------------------------------------
+// SOURCESAFE Update Log
+//
+// $Log:: /Quake 2 Engine/Sin/Base Sin Data/Models/Weapon/view_quantum.def    $
+// 
+// 31    10/23/98 2:54a Joeske
+// Commented out the ALTFIRE sound ref since there's no file.
+// 
+// 30    10/22/98 9:31p Aldie
+// 
+// 29    10/22/98 12:16a Jimdose
+// added setaimanim
+// 
+// 28    10/21/98 6:20p Joeske
+// Added in Zack's modifications for sound references.
+// 
+// 27    10/20/98 6:10p Mph
+// changed second mode to fire out qp_shpere.spr
+// 
+// 26    10/20/98 5:52p Aldie
+// Added flamer
+// 
+// 25    10/16/98 10:22p Aldie
+// 
+// 24    10/16/98 9:49p Aldie
+// 
+// 23    10/13/98 1:13a Aldie
+// Removed 2ndary firing mode
+// 
+// 22    10/07/98 3:34p Aldie
+// Changed order of destruct
+// 
+// 21    10/06/98 4:44p Mph
+// 
+// 20    10/05/98 2:51p Mph
+// 
+// 19    9/30/98 2:41p Joeske
+// Added in formatting.
+// -----------------------------------------------------------------------------
